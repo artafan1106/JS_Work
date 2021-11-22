@@ -1,0 +1,72 @@
+body {
+    /*background-image: url(../img/2114.jpg);*/
+    /*background-size: cover;*/
+    background: white;
+    border: 10px;
+    margin: 10px;
+    padding: 0px;
+    /*overflow: hidden;*/
+}
+div {
+    width: 600px;
+    height: 600px;
+    padding: 0px;
+    background: white;
+    border: 8px ridge saddlebrown;
+    margin-left: 200px;
+    filter: drop-shadow(8px 8px 4px black)
+}
+canvas {
+    width: 300px;
+    height: 300px;
+    margin-left: 150px;
+    margin-top: 150px;
+    border: 2px double cadetblue;
+}
+/*input {*/
+/*    width: 15%;*/
+/*    padding: 8px 8px;*/
+/*    margin-left: 40%;*/
+/*    margin-right: 40%;*/
+/*    margin-top: 5%;*/
+/*    box-sizing: border-box;*/
+/*    color: darkblue;*/
+/*    font-size: 24px;*/
+/*    font-family: "Times New Roman";*/
+/*    background: darkgrey;*/
+/*}*/
+/*h3 {*/
+/*    font-size: xxx-large;*/
+/*    text-align: center;*/
+/*    color: aqua;*/
+/*    font-family: "Times New Roman";*/
+/*}*/
+/*button {*/
+/*    font-size: xxx-large;*/
+/*    color: darkblue;*/
+/*    font-family: "Times New Roman";*/
+/*    margin-left: 40%;*/
+/*    margin-right: 40%;*/
+/*    margin-top: 5%;*/
+/*    width: 15%;*/
+/*    background: darkgrey;*/
+/*}*/
+
+/*.box {*/
+/*    width: 100px;*/
+/*    height: 100px;*/
+/*    background: red;*/
+
+/*}*/
+/*.box1 {*/
+/*    width: 100px;*/
+/*    height: 100px;*/
+/*    background: red;*/
+/*    margin-left: 250px;*/
+/*}*/
+/*.box2 {*/
+/*    width: 100px;*/
+/*    height: 100px;*/
+/*    background: red;*/
+/*    margin-left: 550px;*/
+/*}*/
