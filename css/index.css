@@ -4,15 +4,6 @@ body {
     margin: 10px;
     padding: 0px;
 }
-div {
-    width: 600px;
-    height: 600px;
-    padding: 0px;
-    background: white;
-    border: 8px ridge saddlebrown;
-    margin-left: 200px;
-    filter: drop-shadow(8px 8px 4px black)
-}
 canvas {
     width: 300px;
     height: 300px;
