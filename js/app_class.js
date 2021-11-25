@@ -11,17 +11,18 @@ class Application {
     }
 
     generateSquares() {
-        for (let squareCnt = 0; squareCnt < 25; squareCnt++) {
+        for (let squareCnt = 1; squareCnt < 11; squareCnt++) {
             let square = new Square(squareCnt);
             let square_draw = new Square(this.ctx);
             this.lst.push(square);
             square_draw.draw();
-            console.log(square);
+            if (squareCnt % 5 == 0) {
+                this.ctx.translate(0,70);
+            } else {
+                this.ctx.translate(70, 0);
+            }
         }
     }
 }
-console.log(Square);
-
-const app = new Application()
+const app = new Application();
 app.generateSquares();
-console.log(app);
