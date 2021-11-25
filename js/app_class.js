@@ -7,7 +7,7 @@ class Application {
         this.ctx = canvas.getContext('2d');
         this.canvas.width = 600;
         this.canvas.height = 600;
-        this.lst = [];
+        this.lst_objects = [];
     }
 
     generateSquares() {
