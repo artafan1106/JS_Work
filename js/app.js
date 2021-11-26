@@ -11,13 +11,13 @@ class Application {
     }
 
     generateSquares() {
-        for (let squareCnt = 1; squareCnt < 11; squareCnt++) {
+        for (let squareCnt = 1; squareCnt < 26; squareCnt++) {
             let square = new Square(squareCnt);
             let square_draw = new Square(this.ctx);
-            this.lst.push(square);
+            this.lst_objects.push(square);
             square_draw.draw();
             if (squareCnt % 5 == 0) {
-                this.ctx.translate(0,70);
+                this.ctx.translate(-360,70);
             } else {
                 this.ctx.translate(70, 0);
             }
