@@ -3,7 +3,7 @@ class Tile {
         this.ctx = ctx;
         this.id = id;
         this.width = 90;
-        this.height = 50; // Math.round(Math.random() * 100)
+        this.height = 50;
         this.ctx.x = 50;
         this.ctx.y = 50;
         this.color = "#" + Math.round(Math.random() * 16777215).toString(16);
