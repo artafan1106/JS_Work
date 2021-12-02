@@ -1,0 +1,13 @@
+body {
+    background: white;
+    border: 10px;
+    margin: 10px;
+    padding: 0px;
+}
+canvas {
+    width: 300px;
+    height: 300px;
+    margin-left: 150px;
+    margin-top: 150px;
+    border: 2px double cadetblue;
+}
