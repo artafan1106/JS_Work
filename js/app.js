@@ -1,4 +1,4 @@
-import Square from './square_class.js';
+import Square from './tile_class.js';
 
 
 class Application {
@@ -7,7 +7,7 @@ class Application {
         this.ctx = canvas.getContext('2d');
         this.canvas.width = 600;
         this.canvas.height = 600;
-        this.lst_objects = [];
+        this.tiles = [];
     }
 
     generateTiles() {
@@ -34,10 +34,6 @@ class Application {
 }
 const app = new Application();
 
-frameCount.counter = 0;
-frameCount.fps = 0;
-frameCount(performance.now());
-
 requestAnimationFrame(tick);
 
 function tick(timestamp) {
@@ -47,6 +43,5 @@ function tick(timestamp) {
     const diff = timestamp - pTimestamp;
     pTimestamp = timestamp;
     ctx.clearRect(0,0,800,800);
-    ctx.beginPath();
     app.run();
 }
