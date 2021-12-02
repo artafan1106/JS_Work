@@ -33,7 +33,7 @@ class Application {
     }
 }
 const app = new Application();
-
+let pTimestamp = 0;
 requestAnimationFrame(tick);
 
 function tick(timestamp) {
