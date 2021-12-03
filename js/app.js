@@ -1,12 +1,12 @@
-import Square from './tile_class.js';
+import Tile from './tile_class.js';
 
 
 class Application {
     constructor() {
         this.canvas = document.getElementById('canvas');
         this.ctx = canvas.getContext('2d');
-        this.canvas.width = 600;
-        this.canvas.height = 600;
+        this.canvas.width = 1440;
+        this.canvas.height = 900;
         this.tiles = [];
     }
 
@@ -16,32 +16,18 @@ class Application {
             this.tiles.push(tile);
         }
     }
+    animate() {
+        for (let i = 0; i < 25; i++) {
+            this.tiles[i].update(i,this.canvas.width,this.canvas.height);
+            this.tiles[i].draw();
+        }
+        requestAnimationFrame(this.animate.bind(this));
+
+    }
     run() {
         this.generateTiles();
-        let counter = 1;
-        for (let i = 0; i < 25; i++) {
-            let tile = this.tiles[i];
-            tile.draw();
-            if (counter % 5 != 0) {
-                this.ctx.y += 80;
-            } else {
-                this.ctx.x += 150;
-                this.ctx.y -= 320;
-            }
-            counter += 1;
-        }
+        this.animate();
     }
 }
-const app = new Application();
-let pTimestamp = 0;
-requestAnimationFrame(tick);
 
-function tick(timestamp) {
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d');
-    requestAnimationFrame(tick);
-    const diff = timestamp - pTimestamp;
-    pTimestamp = timestamp;
-    ctx.clearRect(0,0,800,800);
-    app.run();
-}
+new Application().run();
