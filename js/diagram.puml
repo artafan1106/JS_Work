@@ -1,0 +1,22 @@
+@startuml
+skinparam dpi 150
+
+abstract class Application {
+    -CanvasRenderingContext2D ctx
+    +constructor()
+}
+class Tile {
+    -CanvasRenderingContext2D ctx
+    -number id
+    -number width
+    -number height
+    -number x
+    -number y
+
+    +rndColor()
+    +update()
+    +draw()
+}
+Tile --* Application
+
+@enduml
