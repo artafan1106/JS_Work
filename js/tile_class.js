@@ -2,31 +2,37 @@ class Tile {
     constructor(id, ctx) {
         this.ctx = ctx;
         this.id = id;
-        this.width = 90;
-        this.height = 50;
-        this.ctx.x = 450;
-        this.ctx.y = 250;
+        this.width = 60;
+        this.height = 60;
+        this.ctx.x = 720;
+        this.ctx.y = 450;
+        this.angle = 0;
     }
     rndColor() {
         return "#" + Math.round(Math.random() * 16777215).toString(16);
     }
+    setAngle(angle) {
+        this.angle = angle;
+    }
     update(cnt) {
-        this.ctx.x += cnt + 10;
-        this.ctx.y += cnt + 5;
-        if (cnt % 25 == 0) {
-            this.ctx.x = 450;
-            this.ctx.y = 250;
-            this.ctx.clearRect(0,0, this.ctx.canvas.width, this.ctx.canvas.height);
+        if (cnt == 0) {
+            this.ctx.y = 150;
+        } if (cnt % 5 == 0) {
+            this.ctx.y += 90;
+            this.ctx.x = 530;
+        } else {
+            this.ctx.x += 80;
         }
-
-
     }
     draw() {
+        this.ctx.save();
         this.ctx.fillStyle = this.rndColor();
-        this.ctx.fillRect(this.ctx.x, this.ctx.y, this.width, this.height);
         this.ctx.translate(this.ctx.x + this.width / 2,this.ctx.y + this.height / 2);
-        this.ctx.rotate(0.0002);
+        this.ctx.rotate(this.angle);
         this.ctx.translate(-(this.ctx.x + this.width / 2),-(this.ctx.y + this.height / 2));
+        this.ctx.fillRect(this.ctx.x, this.ctx.y, this.width, this.height);
+
+        this.ctx.restore();
     }
 }
 export default Tile;
