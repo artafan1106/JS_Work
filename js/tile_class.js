@@ -11,13 +11,10 @@ class Tile {
     rndColor() {
         return "#" + Math.round(Math.random() * 16777215).toString(16);
     }
-    setAngle(angle) {
-        this.angle = angle;
-    }
     update(cnt) {
-        if (cnt == 0) {
+        if (cnt === 0) {
             this.ctx.y = 150;
-        } if (cnt % 5 == 0) {
+        } if (cnt % 5 === 0) {
             this.ctx.y += 90;
             this.ctx.x = 530;
         } else {
@@ -25,10 +22,14 @@ class Tile {
         }
     }
     draw() {
+        this.angle += 0.1;
+        if (this.angle >= 360) {
+            this.angle = 0;
+        }
         this.ctx.save();
         this.ctx.fillStyle = this.rndColor();
         this.ctx.translate(this.ctx.x + this.width / 2,this.ctx.y + this.height / 2);
-        this.ctx.rotate(this.angle);
+        this.ctx.rotate(this.angle * 0.1);
         this.ctx.translate(-(this.ctx.x + this.width / 2),-(this.ctx.y + this.height / 2));
         this.ctx.fillRect(this.ctx.x, this.ctx.y, this.width, this.height);
 

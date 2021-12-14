@@ -3,7 +3,7 @@ import Tile from './tile_class.js';
 class Application {
     constructor() {
         this.canvas = document.getElementById('canvas');
-        this.ctx = canvas.getContext('2d');
+        this.ctx = this.canvas.getContext('2d');
         this.canvas.width = 1440;
         this.canvas.height = 900;
         this.tiles = [];
@@ -11,6 +11,9 @@ class Application {
         this.startTime = 0;
         this.endTime = 0;
         this.fps = 0;
+        this.debug = false;
+
+        this.currentTime = 0;
     }
 
     generateTiles() {
@@ -19,30 +22,25 @@ class Application {
             this.tiles.push(tile);
         }
     }
-    animate() {
-        this.startTime = performance.now();
+    animate(debug) {
+        this.debug = debug;
+        this.startTime = Date.now();
         this.ctx.clearRect(0,0, this.ctx.canvas.width, this.ctx.canvas.height);
-
+        if (this.debug === true) {
+            this.drawGrid();
+            this.drawFps();
+        }
         for (let i = 0; i < 25; i++) {
-            this.tiles[i].setAngle(45);
             this.tiles[i].update(i);
             this.tiles[i].draw();
         }
-        //this.ctx.save();
-        this.ctx.x = this.ctx.canvas.width / 2;
-        this.ctx.y = this.ctx.canvas.height / 2;
-        this.ctx.translate(this.ctx.x + 60 / 2,this.ctx.y + 60 / 2);
-        this.ctx.rotate(0.01);
-        this.ctx.translate(-(this.ctx.x + 60 / 2),-(this.ctx.y + 60 / 2));
-        //this.ctx.restore();
-
-        requestAnimationFrame(() => this.animate());
-        this.endTime = performance.now();
-        this.fps = (this.endTime - this.startTime) * 60;
-        this.draw_fps();
+        requestAnimationFrame(() => this.animate(this.debug));
+        this.endTime = Date.now();
+        this.fps = (this.endTime - this.startTime) * 10;
+        this.currentTime += 1;
     }
-    draw_Grid() {
-        this.ctx.strokeStyle = "black";
+    drawGrid() {
+        this.ctx.strokeStyle = "green";
         this.ctx.moveTo(this.ctx.canvas.width / 2, 0);
         this.ctx.lineTo(this.ctx.canvas.width / 2, this.ctx.canvas.height);
 
@@ -51,15 +49,20 @@ class Application {
 
         this.ctx.stroke();
     }
-    draw_fps() {
+    drawFps() {
         this.ctx.font = "24px Verdana";
         this.ctx.fillStyle = "black";
-        this.ctx.fillText(`FPS: ${this.fps}`, this.ctx.canvas.width - 110, 40);
+        this.ctx.fillText(`FPS: ${this.fps}`, this.ctx.canvas.width - 180, 40);
+        this.ctx.fillText(`Time: ${this.currentTime / 60}`, this.ctx.canvas.width - 180, 70);
     }
-    run() {
+    run(debug) {
+        this.debug = debug;
         this.generateTiles();
-        this.animate();
+        if (this.debug === false) {
+            this.animate(false);
+        } else {
+            this.animate(true);
+        }
     }
 }
-
-new Application().run();
+new Application().run(true);

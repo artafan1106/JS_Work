@@ -4,6 +4,11 @@ skinparam dpi 150
 abstract class Application {
     -CanvasRenderingContext2D ctx
     +constructor()
+    ---
+    +animate()
+    +drawFps()
+    +drawGrid()
+    +generateTiles()
 }
 class Tile {
     -CanvasRenderingContext2D ctx
@@ -13,10 +18,12 @@ class Tile {
     -number x
     -number y
 
-    +rndColor()
+    ---
+    -rndColor()
+    ---
     +update()
     +draw()
 }
-Tile --* Application
+Application "m" *-- "1" Tile: "включает/содержит"
 
 @enduml
