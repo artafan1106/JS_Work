@@ -1,48 +1,41 @@
-import Square from './tile_class.js';
-
+import Tile from './tile_class.js';
 
 class Application {
     constructor() {
         this.canvas = document.getElementById('canvas');
-        this.ctx = canvas.getContext('2d');
-        this.canvas.width = 600;
-        this.canvas.height = 600;
+        this.ctx = this.canvas.getContext('2d');
+        this.canvas.width = 1440;
+        this.canvas.height = 900;
         this.tiles = [];
     }
 
     generateTiles() {
-        for (let tileCounter = 0; tileCounter < 25; tileCounter++) {
-            let tile = new Tile(tileCounter, this.ctx);
+        let max_depth = 7500;
+        function positionX() {
+            return (Math.floor(Math.random() * 1440));
+        }
+        function positionY() {
+            return (Math.floor(Math.random() * 900));
+        }
+
+        for (let tileCounter = 0; tileCounter < 150; tileCounter++) {
+            let tile = new Tile(this.ctx, positionX(), positionY(), tileCounter * (max_depth / 200));
             this.tiles.push(tile);
         }
+
+    }
+    animate() {
+        requestAnimationFrame(() => this.animate());
+        this.ctx.clearRect(0,0, this.ctx.canvas.width, this.ctx.canvas.height);
+
+        for (let i = 0; i < 150; i++) {
+            this.tiles[i].draw();
+        }
+
     }
     run() {
         this.generateTiles();
-        let counter = 1;
-        for (let i = 0; i < 25; i++) {
-            let tile = this.tiles[i];
-            tile.draw();
-            if (counter % 5 != 0) {
-                this.ctx.y += 80;
-            } else {
-                this.ctx.x += 150;
-                this.ctx.y -= 320;
-            }
-            counter += 1;
-        }
+        this.animate();
     }
 }
-const app = new Application();
-
-let pTimestamp = 0;
-requestAnimationFrame(tick);
-
-function tick(timestamp) {
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d');
-    requestAnimationFrame(tick);
-    const diff = timestamp - pTimestamp;
-    pTimestamp = timestamp;
-    ctx.clearRect(0,0,800,800);
-    app.run();
-}
+new Application().run();

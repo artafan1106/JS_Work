@@ -1,19 +1,33 @@
 class Tile {
-    constructor(id, ctx) {
+    constructor(ctx, x, y, z) {
         this.ctx = ctx;
-        this.id = id;
-        this.width = 90;
-        this.height = 50;
-        this.ctx.x = 50;
-        this.ctx.y = 50;
-        this.color = "#" + Math.round(Math.random() * 16777215).toString(16);
+        this.width = 30;
+        this.height = 30;
+        this.ctx.x = x;
+        this.ctx.y = y;
+        this.ctx.z = z;
+
     }
     draw() {
-        this.ctx.fillStyle = this.color;
-        this.ctx.fillRect(this.ctx.x, this.ctx.y, this.width, this.height);
-        this.ctx.translate(this.ctx.x + this.width / 2,this.ctx.y + this.height / 2);
-        this.ctx.rotate(0.0003);
-        this.ctx.translate(-(this.ctx.x + this.width / 2),-(this.ctx.y + this.height / 2));
+        this.ctx.clearRect(0,0,1440,900);
+        if (this.ctx.z < 0) {
+            this.ctx.z = 7500;
+            this.ctx.x,this.ctx.y = Math.random() * 1440, Math.random() * 900;
+        }
+
+        let translate_x = this.ctx.canvas.width * 0.5;
+        let translate_y = this.ctx.canvas.height * 0.5;
+
+        let field_of_view = (this.ctx.canvas.height + this.ctx.canvas.width) * 0.2;
+
+        let star_x = (this.ctx.x - translate_x) / (this.ctx.z / field_of_view) + translate_x;
+        let star_y = (this.ctx.y - translate_y) / (this.ctx.z / field_of_view) + translate_y;
+
+        let scale = field_of_view / (field_of_view + this.ctx.z);
+
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillRect(star_x, star_y, this.width * scale, this.height * scale);
+        this.ctx.z -= 0.5;
     }
 }
 export default Tile;
