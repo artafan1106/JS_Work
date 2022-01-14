@@ -1,0 +1,31 @@
+@startuml
+skinparam dpi 150
+
+abstract class Application {
+    -CanvasRenderingContext2D ctx
+    +constructor()
+    -number canvas.width
+    -number canvas.height
+    -array tiles
+    -number numTiles
+    ---
+    +generateTiles()
+    +animate()
+    +run()
+}
+class Tile {
+    -CanvasRenderingContext2D ctx
+    ---
+    +constructor()
+    -number size
+    -number x
+    -number y
+    -number z
+    -number centerX
+    -number centerY
+    ---
+    +drawPosition()
+}
+Application "numTiles" *-- "1" Tile: "вкл/содержит"
+
+@enduml
