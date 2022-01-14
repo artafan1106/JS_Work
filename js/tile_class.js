@@ -1,33 +1,37 @@
 class Tile {
-    constructor(ctx, x, y, z) {
-        this.ctx = ctx;
-        this.width = 30;
-        this.height = 30;
-        this.ctx.x = x;
-        this.ctx.y = y;
-        this.ctx.z = z;
+    constructor() {
+        this.canvas = document.getElementById("canvas");
+        this.ctx = this.canvas.getContext("2d");
+        this.size = 1.5;
+        this.x = Math.random() * this.canvas.width;
+        this.y = Math.random() * this.canvas.height;
+        this.z = Math.random() * (this.canvas.width + this.canvas.height);
+        this.speed = 2.5;
+
+        this.centerX = this.canvas.width / 2;
+        this.centerY = this.canvas.height / 2;
 
     }
-    draw() {
-        this.ctx.clearRect(0,0,1440,900);
-        if (this.ctx.z < 0) {
-            this.ctx.z = 7500;
-            this.ctx.x,this.ctx.y = Math.random() * 1440, Math.random() * 900;
+    drawPosition() {
+        this.z -= this.speed;
+        if (this.z < 0) {
+            this.z = this.canvas.width;
         }
+        let x,y,s;
 
-        let translate_x = this.ctx.canvas.width * 0.5;
-        let translate_y = this.ctx.canvas.height * 0.5;
+        x = (this.x - this.centerX) * (this.canvas.width / this.z);
+        x = x + this.centerX;
 
-        let field_of_view = (this.ctx.canvas.height + this.ctx.canvas.width) * 0.2;
+        y = (this.y - this.centerY) * (this.canvas.width / this.z);
+        y = y + this.centerY;
 
-        let star_x = (this.ctx.x - translate_x) / (this.ctx.z / field_of_view) + translate_x;
-        let star_y = (this.ctx.y - translate_y) / (this.ctx.z / field_of_view) + translate_y;
+        s = this.size * (this.canvas.width / this.z);
 
-        let scale = field_of_view / (field_of_view + this.ctx.z);
-
-        this.ctx.fillStyle = 'white';
-        this.ctx.fillRect(star_x, star_y, this.width * scale, this.height * scale);
-        this.ctx.z -= 0.5;
+        this.ctx.beginPath();
+        this.ctx.fillStyle = '#cd5700';
+        this.ctx.fillRect(x, y, s, s);
+        this.ctx.fill();
     }
+
 }
 export default Tile;
